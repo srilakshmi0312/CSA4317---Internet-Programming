@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ABC Bike Showroom</title>
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: Arial, Helvetica, sans-serif; color: #172033; background: #f3f6fb; }
+  header {
+    min-height: 112px; padding: 24px 6%; display: flex; align-items: center;
+    justify-content: space-between; gap: 18px; color: white;
+    background: linear-gradient(120deg, #101d3b, #174e75);
+  }
+  .brand { display: flex; align-items: center; gap: 14px; }
+  .logo { width: 54px; height: 54px; border-radius: 15px; display: grid; place-items: center;
+    background: #f5a623; color: #101d3b; font-size: 28px; font-weight: 800; }
+  h1 { margin: 0; font-size: clamp(22px, 3vw, 32px); }
+  header p { margin: 6px 0 0; color: #d5e6f6; font-size: 14px; }
+  .status { border: 1px solid #ffffff55; border-radius: 999px; padding: 9px 14px; font-size: 13px; white-space: nowrap; }
+  .layout { display: grid; grid-template-columns: 240px minmax(0, 1fr); gap: 22px; max-width: 1200px; margin: 28px auto; padding: 0 20px; }
+  aside, main { background: white; border: 1px solid #e0e7f0; border-radius: 18px; box-shadow: 0 8px 28px #1527460a; }
+  aside { padding: 22px 16px; }
+  .section-label { color: #718096; font-size: 11px; font-weight: 800; letter-spacing: 1.5px; margin: 0 10px 12px; }
+  .brand-button { width: 100%; display: flex; align-items: center; gap: 12px; border: 0; background: transparent;
+    padding: 13px 12px; margin: 4px 0; text-align: left; border-radius: 12px; cursor: pointer; color: #334155; font-size: 15px; }
+  .brand-button:hover { background: #f0f5fb; }
+  .brand-button.active { background: #e8f2ff; color: #145b9b; font-weight: 700; box-shadow: inset 3px 0 #1976c9; }
+  .brand-icon { width: 34px; height: 34px; border-radius: 10px; display: grid; place-items: center; background: #f1f5f9; font-size: 17px; }
+  .active .brand-icon { background: white; }
+  .aside-note { margin: 22px 8px 0; padding-top: 16px; border-top: 1px solid #edf1f6; color: #718096; font-size: 12px; line-height: 1.6; }
+  main { padding: clamp(20px, 4vw, 34px); min-width: 0; }
+  .eyebrow { color: #1976c9; text-transform: uppercase; font-size: 11px; letter-spacing: 1.5px; font-weight: 800; }
+  .main-heading { display: flex; justify-content: space-between; align-items: start; gap: 18px; flex-wrap: wrap; }
+  h2 { margin: 8px 0 7px; font-size: clamp(24px, 3vw, 34px); }
+  .intro { color: #718096; margin: 0; line-height: 1.6; }
+  .count { padding: 8px 12px; border-radius: 999px; background: #f0f5fb; color: #475569; font-size: 12px; white-space: nowrap; }
+  .model-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-top: 26px; }
+  .model-card { border: 1px solid #e2e8f0; border-radius: 15px; padding: 19px; background: linear-gradient(145deg, #fff, #fbfdff); }
+  .bike-art { height: 105px; display: grid; place-items: center; background: #f0f5fa; border-radius: 12px; font-size: 58px; margin-bottom: 17px; }
+  .model-card h3 { margin: 0 0 6px; font-size: 18px; }
+  .model-card .type { color: #718096; font-size: 12px; margin-bottom: 16px; }
+  .specs { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .spec { padding: 10px; border-radius: 9px; background: #f5f7fb; }
+  .spec span { display: block; font-size: 11px; color: #718096; margin-bottom: 5px; }
+  .spec strong { font-size: 14px; }
+  .price-row { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-top: 16px; padding-top: 14px; border-top: 1px solid #edf1f6; }
+  .price { font-size: 18px; font-weight: 800; color: #155e91; }
+  .details { border: 0; border-radius: 9px; background: #142c4d; color: white; padding: 9px 12px; cursor: pointer; font-weight: 700; }
+  .details:hover { background: #1976c9; }
+  .message { margin-top: 20px; font-size: 12px; color: #718096; line-height: 1.5; }
+  footer { text-align: center; color: #718096; padding: 0 20px 26px; font-size: 12px; }
+  @media (max-width: 720px) {
+    header { align-items: flex-start; flex-direction: column; padding: 22px 20px; }
+    .layout { grid-template-columns: 1fr; margin-top: 16px; padding: 0 12px; gap: 14px; }
+    aside { padding: 16px 12px; }
+    .brand-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 4px; }
+    .brand-button { margin: 0; padding: 10px 8px; font-size: 13px; }
+    .aside-note { display: none; }
+    .model-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="brand">
+    <div class="logo">AB</div>
+    <div>
+      <h1>ABC Bike Showroom</h1>
+      <p>Find your ride. Compare your next adventure.</p>
+    </div>
+  </div>
+  <div class="status">● Showroom catalogue</div>
+</header>
+
+<div class="layout">
+  <aside>
+    <p class="section-label">EXPLORE BRANDS</p>
+    <nav class="brand-list" aria-label="Bike brands">
+      <button class="brand-button active" data-brand="Honda"><span class="brand-icon">🏍️</span> Honda</button>
+      <button class="brand-button" data-brand="Yamaha"><span class="brand-icon">🏁</span> Yamaha</button>
+      <button class="brand-button" data-brand="TVS"><span class="brand-icon">⚡</span> TVS</button>
+      <button class="brand-button" data-brand="Royal Enfield"><span class="brand-icon">🛣️</span> Royal Enfield</button>
+      <button class="brand-button" data-brand="KTM"><span class="brand-icon">🔶</span> KTM</button>
+    </nav>
+    <p class="aside-note">Choose a brand to view its models, engine capacity, mileage and indicative price.</p>
+  </aside>
+
+  <main>
+    <div class="main-heading">
+      <div>
+        <div class="eyebrow">Selected brand</div>
+        <h2 id="brand-title">Honda Bikes</h2>
+        <p class="intro" id="brand-description">Reliable everyday rides with practical performance.</p>
+      </div>
+      <div class="count" id="model-count">2 models</div>
+    </div>
+    <div class="model-grid" id="model-grid"></div>
+    <p class="message">Note: This is a sample student webpage. Prices and specifications are illustrative and may differ from current showroom details.</p>
+  </main>
+</div>
+<footer>ABC Bike Showroom · Sample HTML, CSS and JavaScript project</footer>
+
+<script>
+const catalogue = {
+  "Honda": {
+    description: "Reliable everyday rides with practical performance.",
+    models: [
+      {name:"Shine 125", type:"Commuter", engine:"123.94 cc", mileage:"Approx. 55 km/l", price:"₹80,000*", power:"10.7 bhp"},
+      {name:"SP 125", type:"Sport commuter", engine:"123.94 cc", mileage:"Approx. 60 km/l", price:"₹91,000*", power:"10.8 bhp"}
+    ]
+  },
+  "Yamaha": {
+    description: "Sporty styling and responsive performance.",
+    models: [
+      {name:"FZ-S Fi", type:"Street motorcycle", engine:"149 cc", mileage:"Approx. 45 km/l", price:"₹1,22,000*", power:"12.4 bhp"},
+      {name:"R15", type:"Sport motorcycle", engine:"155 cc", mileage:"Approx. 40 km/l", price:"₹1,85,000*", power:"18.4 bhp"}
+    ]
+  },
+  "TVS": {
+    description: "Practical, feature-rich motorcycles for everyday travel.",
+    models: [
+      {name:"Raider 125", type:"Sport commuter", engine:"124.8 cc", mileage:"Approx. 55 km/l", price:"₹95,000*", power:"11.2 bhp"},
+      {name:"Apache RTR 160", type:"Street motorcycle", engine:"159.7 cc", mileage:"Approx. 45 km/l", price:"₹1,20,000*", power:"16.0 bhp"}
+    ]
+  },
+  "Royal Enfield": {
+    description: "Classic design and relaxed rides for the open road.",
+    models: [
+      {name:"Classic 350", type:"Classic motorcycle", engine:"349 cc", mileage:"Approx. 35 km/l", price:"₹1,95,000*", power:"20.2 bhp"},
+      {name:"Hunter 350", type:"Roadster", engine:"349 cc", mileage:"Approx. 36 km/l", price:"₹1,50,000*", power:"20.2 bhp"}
+    ]
+  },
+  "KTM": {
+    description: "Sharp styling and performance-focused motorcycles.",
+    models: [
+      {name:"Duke 200", type:"Street motorcycle", engine:"199.5 cc", mileage:"Approx. up to 35 km/l", price:"₹2,00,000*", power:"25 PS"},
+      {name:"RC 200", type:"Sport motorcycle", engine:"199.5 cc", mileage:"Approx. 30 km/l", price:"₹2,15,000*", power:"25 PS"}
+    ]
+  }
+};
+
+const grid = document.getElementById("model-grid");
+const title = document.getElementById("brand-title");
+const description = document.getElementById("brand-description");
+const count = document.getElementById("model-count");
+
+function showBrand(brand) {
+  const info = catalogue[brand];
+  title.textContent = brand + " Bikes";
+  description.textContent = info.description;
+  count.textContent = info.models.length + " models";
+  grid.innerHTML = "";
+  info.models.forEach(model => {
+    const card = document.createElement("article");
+    card.className = "model-card";
+    card.innerHTML = `
+      <div class="bike-art" aria-hidden="true">🏍️</div>
+      <h3>${model.name}</h3>
+      <div class="type">${model.type}</div>
+      <div class="specs">
+        <div class="spec"><span>Engine</span><strong>${model.engine}</strong></div>
+        <div class="spec"><span>Claimed/sample mileage</span><strong>${model.mileage}</strong></div>
+        <div class="spec"><span>Power</span><strong>${model.power}</strong></div>
+        <div class="spec"><span>Brand</span><strong>${brand}</strong></div>
+      </div>
+      <div class="price-row">
+        <div class="price">${model.price}</div>
+        <button class="details" type="button">View details</button>
+      </div>`;
+    card.querySelector(".details").addEventListener("click", () => {
+      alert(model.name + "\\nBrand: " + brand + "\\nEngine: " + model.engine +
+        "\\nPower: " + model.power + "\\nSample price: " + model.price +
+        "\\n\\nPlease confirm current specifications and price with the dealer.");
+    });
+    grid.appendChild(card);
+  });
+  document.querySelectorAll(".brand-button").forEach(button => {
+    const active = button.dataset.brand === brand;
+    button.classList.toggle("active", active);
+    button.setAttribute("aria-pressed", active ? "true" : "false");
+  });
+}
+
+document.querySelectorAll(".brand-button").forEach(button => {
+  button.addEventListener("click", () => showBrand(button.dataset.brand));
+});
+showBrand("Honda");
+</script>
+</body>
+</html>

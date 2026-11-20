@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LAMP and WAMP Development Environment</title>
+<style>
+  :root { --navy:#17324d; --blue:#2864a6; --light:#f3f7fb; --border:#d8e1eb; --text:#243447; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:Arial, Helvetica, sans-serif; color:var(--text); background:var(--light); line-height:1.6; }
+  header { background:linear-gradient(120deg,#17324d,#2864a6); color:white; padding:38px 20px; text-align:center; }
+  header h1 { margin:0 0 8px; font-size:clamp(1.8rem,4vw,2.7rem); }
+  header p { margin:0 auto; max-width:760px; }
+  nav { background:#fff; padding:12px 18px; display:flex; flex-wrap:wrap; justify-content:center; gap:18px; border-bottom:1px solid var(--border); position:sticky; top:0; }
+  nav a { color:var(--blue); text-decoration:none; font-weight:bold; }
+  nav a:hover { text-decoration:underline; }
+  main { width:min(1050px,92%); margin:28px auto 50px; }
+  section { background:#fff; border:1px solid var(--border); border-radius:12px; padding:24px; margin-bottom:22px; box-shadow:0 3px 12px #17324d0b; }
+  h2 { color:var(--navy); margin-top:0; border-bottom:2px solid #e8eef5; padding-bottom:8px; }
+  h3 { color:var(--blue); margin-bottom:6px; }
+  .cards { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:14px; }
+  .card { background:#f7faff; border:1px solid var(--border); border-radius:9px; padding:15px; }
+  .tag { display:inline-block; font-size:.8rem; font-weight:bold; background:#e4effc; color:#214f83; border-radius:20px; padding:3px 10px; margin-bottom:6px; }
+  table { border-collapse:collapse; width:100%; margin-top:12px; }
+  th,td { border:1px solid var(--border); text-align:left; padding:11px; vertical-align:top; }
+  th { background:#eaf1f8; color:var(--navy); }
+  pre { background:#172331; color:#edf5ff; padding:15px; border-radius:8px; overflow-x:auto; }
+  code { font-family:Consolas,monospace; }
+  .note { background:#fff8e8; border-left:4px solid #e0a62b; padding:12px 15px; border-radius:4px; }
+  footer { background:var(--navy); color:white; text-align:center; padding:18px; }
+  @media(max-width:600px) { section { padding:17px; } th,td { padding:8px; font-size:.92rem; } nav { gap:10px; } }
+</style>
+</head>
+<body>
+<header>
+  <h1>LAMP and WAMP Stacks</h1>
+  <p>A simple guide to their components, installation, and the role of the Apache web server.</p>
+</header>
+<nav>
+  <a href="#lamp">LAMP Stack</a>
+  <a href="#wamp">WAMP Stack</a>
+  <a href="#compare">Comparison</a>
+  <a href="#apache">Apache Web Server</a>
+</nav>
+<main>
+  <section id="lamp">
+    <h2>1. Key Components of the LAMP Stack</h2>
+    <p>LAMP is a group of open-source technologies commonly used to build and run dynamic websites and web applications on Linux.</p>
+    <div class="cards">
+      <div class="card"><span class="tag">L — Linux</span><h3>Operating system</h3><p>Manages hardware, files, processes, users, and system resources.</p></div>
+      <div class="card"><span class="tag">A — Apache</span><h3>Web server</h3><p>Receives HTTP requests from browsers and serves webpages or passes dynamic requests to PHP.</p></div>
+      <div class="card"><span class="tag">M — MySQL</span><h3>Database</h3><p>Stores and retrieves structured application data, such as users, products, and orders.</p></div>
+      <div class="card"><span class="tag">P — PHP</span><h3>Server-side language</h3><p>Runs application logic, processes forms, communicates with the database, and generates dynamic pages.</p></div>
+    </div>
+    <h3>Typical installation on Linux (Ubuntu/Debian)</h3>
+    <p>Open a terminal and install the components using the package manager:</p>
+    <pre><code>sudo apt update
+sudo apt install apache2 mysql-server php libapache2-mod-php php-mysql</code></pre>
+    <p>Start and enable the services, then check Apache in a browser at <code>http://localhost</code>:</p>
+    <pre><code>sudo systemctl enable --now apache2
+sudo systemctl enable --now mysql</code></pre>
+    <p>For a simple PHP test, create <code>/var/www/html/info.php</code> with <code>&lt;?php phpinfo(); ?&gt;</code> and visit <code>http://localhost/info.php</code>. Remove this test file after testing because it reveals configuration details.</p>
+  </section>
+
+  <section id="wamp">
+    <h2>2. Key Components of the WAMP Stack</h2>
+    <p>WAMP provides a similar web development environment on Microsoft Windows.</p>
+    <div class="cards">
+      <div class="card"><span class="tag">W — Windows</span><h3>Operating system</h3><p>Provides the platform on which the development tools and services run.</p></div>
+      <div class="card"><span class="tag">A — Apache</span><h3>Web server</h3><p>Accepts browser requests and serves files or runs server-side application code.</p></div>
+      <div class="card"><span class="tag">M — MySQL</span><h3>Database</h3><p>Stores and manages the application's data.</p></div>
+      <div class="card"><span class="tag">P — PHP</span><h3>Server-side language</h3><p>Processes application logic and creates dynamic responses.</p></div>
+    </div>
+    <h3>Typical installation on Windows</h3>
+    <ol>
+      <li>Download a reputable WAMP package, such as WampServer, from its official website.</li>
+      <li>Check the package's Windows and runtime prerequisites, then run the installer.</li>
+      <li>Choose the installation folder and complete the setup.</li>
+      <li>Start the WAMP services and confirm that the server indicator shows that services are running.</li>
+      <li>Open <code>http://localhost</code> in a browser to test the local server.</li>
+      <li>Place project files in the WAMP web directory, commonly <code>www</code>, and test the application.</li>
+    </ol>
+    <p class="note">Installation screens and folder locations can vary by WAMP package and version. Use the official package instructions and avoid exposing a development server directly to the internet.</p>
+  </section>
+
+  <section id="compare">
+    <h2>3. LAMP vs WAMP</h2>
+    <table>
+      <thead><tr><th>Feature</th><th>LAMP</th><th>WAMP</th></tr></thead>
+      <tbody>
+        <tr><td>Operating system</td><td>Linux</td><td>Windows</td></tr>
+        <tr><td>Web server</td><td>Apache</td><td>Apache</td></tr>
+        <tr><td>Database</td><td>MySQL</td><td>MySQL</td></tr>
+        <tr><td>Server-side language</td><td>PHP</td><td>PHP</td></tr>
+        <tr><td>Common setup method</td><td>Install packages using the Linux package manager.</td><td>Use a Windows installer package such as WampServer.</td></tr>
+        <tr><td>Typical use</td><td>Linux development and many Linux-hosted servers.</td><td>Local development on Windows computers.</td></tr>
+      </tbody>
+    </table>
+    <p>Both stacks support dynamic websites. The main difference is the operating system and the way the environment is installed and managed.</p>
+  </section>
+
+  <section id="apache">
+    <h2>4. Role of Apache Web Server</h2>
+    <p>Apache HTTP Server is the web-server component in both LAMP and WAMP. It connects the browser to the application running on the server.</p>
+    <ol>
+      <li><strong>Receives requests:</strong> A browser sends an HTTP request for a page or resource.</li>
+      <li><strong>Serves static files:</strong> Apache can return HTML, CSS, JavaScript, and image files directly.</li>
+      <li><strong>Runs dynamic applications:</strong> With PHP configured, Apache passes PHP requests to the PHP handler for processing.</li>
+      <li><strong>Works with MySQL:</strong> PHP application code communicates with MySQL to read or update data.</li>
+      <li><strong>Sends responses:</strong> Apache returns the generated page or other response to the browser.</li>
+    </ol>
+    <h3>How the components work together</h3>
+    <pre><code>Browser
+   | HTTP request
+   v
+Apache Web Server
+   | PHP request
+   v
+PHP Application  <---->  MySQL Database
+   |
+   | Generated response
+   v
+Apache  ---- HTTP response ----> Browser</code></pre>
+    <p><strong>Example:</strong> When a user logs in, Apache receives the login request, PHP checks the submitted details against records in MySQL, and Apache returns the result to the browser.</p>
+  </section>
+</main>
+<footer>
+  <p>Web Technology — LAMP and WAMP Development Environment</p>
+</footer>
+</body>
+</html>
